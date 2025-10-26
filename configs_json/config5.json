@@ -1,0 +1,91 @@
+{
+    "window": {
+        "width": 1400,
+        "height": 900,
+        "title": "Сияющие неоновые волны"
+    },
+    "background_color": [15, 5, 25],
+    "layout": {
+        "spacing": 22,
+        "padding": 30
+    },
+    "sinusoids": [
+        {
+        "amplitude": 85,
+        "frequency": 0.055,
+        "speed": 0.072,
+        "color": [0, 255, 255],
+        "line_width": 4,
+        "step": 1,
+        "time_step": 0.048
+        },
+        {
+        "amplitude": 105,
+        "frequency": 0.042,
+        "speed": 0.063,
+        "color": [255, 20, 147],
+        "line_width": 5,
+        "step": 2,
+        "time_step": 0.052
+        },
+        {
+        "amplitude": 125,
+        "frequency": 0.038,
+        "speed": 0.058,
+        "color": [50, 205, 50],
+        "line_width": 3,
+        "step": 3,
+        "time_step": 0.045
+        },
+        {
+        "amplitude": 95,
+        "frequency": 0.068,
+        "speed": 0.082,
+        "color": [255, 69, 0],
+        "line_width": 4,
+        "step": 1,
+        "time_step": 0.055
+        },
+        {
+        "amplitude": 115,
+        "frequency": 0.032,
+        "speed": 0.052,
+        "color": [138, 43, 226],
+        "line_width": 6,
+        "step": 2,
+        "time_step": 0.042
+        }
+    ],
+    "circles": [
+        {
+        "weight": 42,
+        "volume": 48,
+        "radius": 13,
+        "color": [0, 255, 255]
+        },
+        {
+        "weight": 58,
+        "volume": 65,
+        "radius": 17,
+        "color": [255, 20, 147]
+        },
+        {
+        "weight": 68,
+        "volume": 72,
+        "radius": 19,
+        "color": [50, 205, 50]
+        },
+        {
+        "weight": 48,
+        "volume": 52,
+        "radius": 14,
+        "color": [255, 69, 0]
+        },
+        {
+        "weight": 72,
+        "volume": 78,
+        "radius": 21,
+        "color": [138, 43, 226]
+        }
+    ]
+}

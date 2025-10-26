@@ -1,0 +1,46 @@
+{
+    "window": {
+        "width": 1200,
+        "height": 800,
+        "title": "Встречные волны"
+    },
+    "background_color": [245, 245, 245],
+    "layout": {
+        "spacing": 40,
+        "padding": 30
+    },
+    "sinusoids": [
+        {
+        "amplitude": 100,
+        "frequency": 0.05,
+        "speed": 0.08,
+        "color": [70, 130, 180],
+        "line_width": 4,
+        "step": 2,
+        "time_step": 0.05
+        },
+        {
+        "amplitude": 100,
+        "frequency": 0.05,
+        "speed": -0.08,
+        "color": [220, 20, 60],
+        "line_width": 4,
+        "step": 2,
+        "time_step": 0.05
+        }
+    ],
+    "circles": [
+        {
+        "weight": 50,
+        "volume": 60,
+        "radius": 16,
+        "color": [70, 130, 180]
+        },
+        {
+        "weight": 50,
+        "volume": 60,
+        "radius": 16,
+        "color": [220, 20, 60]
+        }
+    ]
+}

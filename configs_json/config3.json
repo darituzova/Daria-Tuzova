@@ -1,0 +1,61 @@
+{
+    "window": {
+        "width": 1200,
+        "height": 800,
+        "title": "Бирюзовые волны"
+    },
+    "background_color": [240, 248, 255],
+    "layout": {
+        "spacing": 30,
+        "padding": 20
+    },
+    "sinusoids": [
+        {
+        "amplitude": 80,
+        "frequency": 0.06,
+        "speed": 0.08,
+        "color": [0, 206, 209],
+        "line_width": 4,
+        "step": 2,
+        "time_step": 0.05
+        },
+        {
+        "amplitude": 100,
+        "frequency": 0.04,
+        "speed": 0.06,
+        "color": [64, 224, 208],
+        "line_width": 3,
+        "step": 2,
+        "time_step": 0.04
+        },
+        {
+        "amplitude": 120,
+        "frequency": 0.03,
+        "speed": 0.05,
+        "color": [72, 209, 204],
+        "line_width": 5,
+        "step": 2,
+        "time_step": 0.03
+        }
+    ],
+    "circles": [
+        {
+        "weight": 45,
+        "volume": 55,
+        "radius": 12,
+        "color": [0, 139, 139]
+        },
+        {
+        "weight": 55,
+        "volume": 65,
+        "radius": 16,
+        "color": [0, 128, 128]
+        },
+        {
+        "weight": 65,
+        "volume": 75,
+        "radius": 20,
+        "color": [0, 107, 107]
+        }
+    ]
+}

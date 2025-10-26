@@ -1,0 +1,91 @@
+{
+    "window": {
+        "width": 1200,
+        "height": 800,
+        "title": "Разноцветные волны с шарами"
+    },
+    "background_color": [30, 30, 50],
+    "layout": {
+        "spacing": 25,
+        "padding": 15
+    },
+    "sinusoids": [
+        {
+        "amplitude": 120,
+        "frequency": 0.05,
+        "speed": 0.08,
+        "color": [255, 100, 100],
+        "line_width": 4,
+        "step": 2,
+        "time_step": 0.04
+        },
+        {
+        "amplitude": 80,
+        "frequency": 0.08,
+        "speed": 0.12,
+        "color": [100, 255, 100],
+        "line_width": 3,
+        "step": 1,
+        "time_step": 0.06
+        },
+        {
+        "amplitude": 150,
+        "frequency": 0.03,
+        "speed": 0.05,
+        "color": [100, 100, 255],
+        "line_width": 5,
+        "step": 3,
+        "time_step": 0.03
+        },
+        {
+        "amplitude": 90,
+        "frequency": 0.1,
+        "speed": 0.15,
+        "color": [255, 255, 100],
+        "line_width": 3,
+        "step": 1,
+        "time_step": 0.08
+        },
+        {
+        "amplitude": 110,
+        "frequency": 0.06,
+        "speed": 0.09,
+        "color": [255, 100, 255],
+        "line_width": 4,
+        "step": 2,
+        "time_step": 0.05
+        }
+    ],
+    "circles": [
+        {
+        "weight": 40,
+        "volume": 50,
+        "radius": 12,
+        "color": [255, 150, 150]
+        },
+        {
+        "weight": 60,
+        "volume": 70,
+        "radius": 18,
+        "color": [150, 255, 150]
+        },
+        {
+        "weight": 80,
+        "volume": 90,
+        "radius": 22,
+        "color": [150, 150, 255]
+        },
+        {
+        "weight": 45,
+        "volume": 55,
+        "radius": 14,
+        "color": [255, 255, 150]
+        },
+        {
+        "weight": 70,
+        "volume": 80,
+        "radius": 20,
+        "color": [255, 150, 255]
+        }
+    ]
+}

@@ -1,13 +1,13 @@
 import pygame
 import sys
 import numpy as np
+import math
 
 class Sinusoid:
-    def __init__(self, amplitude, frequency, speed, phase, color, line_width):
+    def __init__(self, amplitude, frequency, speed, color, line_width):
         self.amplitude = amplitude
         self.frequency = frequency
-        self.speed = speed 
-        self.phase = phase
+        self.speed = speed
         self.color = color
         self.line_width = line_width
         
@@ -18,7 +18,7 @@ class Sinusoid:
         shift_vertical = screen_height // 2
         
         x = np.arange(0, screen_width, 2)
-        y = self.amplitude * np.sin(self.frequency * x + self.speed * self.t + self.phase) + shift_vertical
+        y = self.amplitude * np.sin(self.frequency * x + self.speed * self.t) + shift_vertical
         
         points = np.stack((x, y.astype(np.int32)), axis=1)
         
@@ -36,7 +36,7 @@ pygame.init()
 
 screen = pygame.display.set_mode()
 
-sinusoid = Sinusoid(100, 0.02, 0.1, 0, (0, 255, 0), 2)
+sinusoid = Sinusoid(100, 0.1, 0.1, (0, 255, 0), 1)
 
 running = True
 while running:

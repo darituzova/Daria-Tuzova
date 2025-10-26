@@ -1,6 +1,7 @@
 import pygame
 import sys
 import numpy as np
+import json
 
 
 def set_shift_vertical_to_sinusoids(sinusoids, screen_height, spacing=20, padding=10):
@@ -89,16 +90,52 @@ class Circle:
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
         pygame.draw.circle(screen, edge_color, (self.x, self.y), self.radius, 2)
 
+def load_config_json(file='configs_json/config1.json'):
+    try:
+        with open(file, 'r', encoding='UTF-8') as f:
+            return json.load(f)
+    except Exception as e:
+        print(f'Ошибка: {e}')
+        
+def create_sinusoids_from_config(config):
+    sinusoids = []
+    for sinusoid_config in config.get('sinusoids', []):
+        sinusoid = Sinusoid(amplitude=sinusoid_config.get('amplitude', 50), frequency=sinusoid_config.get('frequency', 0.2),
+                            speed=sinusoid_config.get('speed', 0.1), color=tuple(sinusoid_config.get('color', [255, 0, 0])),
+                            line_width=sinusoid_config.get('line_width', 3), step=sinusoid_config.get('step', 1),
+                            time_step=sinusoid_config.get('time_step', 0.05))
+        sinusoids.append(sinusoid)
+    return sinusoids
+
+def create_circles_from_config(config, sinusoids):
+    circles = []
+    for i, sinusoid in enumerate(sinusoids):
+        circle_configs = config.get('circles', [])
+        if i < len(circle_configs):
+            circle_config = circle_configs[i]
+            circle = Circle(sinusoid, weight=circle_config.get('weight', 50), volume=circle_config.get('volume', 60),
+                            radius=circle_config.get('radius', 15), color=tuple(circle_config.get('color', [0, 0, 255])))
+        else:
+            circle = Circle(sinusoid)
+        circles.append(circle)  
+    return circle
 
 pygame.init()
 
-screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
-pygame.display.set_caption('Волны')
+config = load_config_json()
 
-sinusoids = [Sinusoid(amplitude=100, frequency=0.07, speed=0.07), Sinusoid(amplitude=100, frequency=0.05, speed=0.05), Sinusoid(amplitude=100, frequency=0.03, speed=0.03), Sinusoid(amplitude=100, frequency=0.01, speed=0.1)]
-set_shift_vertical_to_sinusoids(sinusoids, screen.get_height())
+screen = pygame.display.set_mode((config.get('window', {}).get('width', 0), config.get('window', {}).get('height', 0)), pygame.RESIZABLE)
+pygame.display.set_caption(config['window']['title'])
 
-circles = [Circle(sinusoids[0]), Circle(sinusoids[1]), Circle(sinusoids[2]), Circle(sinusoids[3])]
+pygame.display.set_caption(config.get('window', {}).get('title', 'Волны'))
+
+background_color = tuple(config.get('background_color', [239, 238, 238]))
+
+sinusoids = create_sinusoids_from_config(config)
+circles = create_circles_from_config(config, sinusoids)
+
+layout = config.get('layout', {})
+set_shift_vertical_to_sinusoids(sinusoids, screen.get_height(), spacing=layout.get('spacing', 20), padding=layout.get('padding', 10))
 
 running = True
 while running:
@@ -108,7 +145,8 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
-    screen.fill((239, 238, 238))
+
+    screen.fill(background_color)
     for sinusoid in sinusoids: 
         sinusoid.draw(screen)
 

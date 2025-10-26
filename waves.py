@@ -6,8 +6,11 @@ class Waves(QWidget):
     def __init__(self):
         super().__init__()
         
-        self.setGeometry(500, 600, 1000, 700)
-
+        self.setWindowTitle('Волны')
+        self.resize(1000, 700)
+        
+        self.setStyleSheet('background-color: #42aaff')
+        
 app = QApplication(sys.argv)
 
 window_waves = Waves()

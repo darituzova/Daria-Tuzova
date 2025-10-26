@@ -56,7 +56,7 @@ class Sinusoid:
         
         self.update_circles(screen.get_width())
         for circle in self.circles:
-            circle.draw_circle(screen, edge_color=self.color)
+            circle.draw(screen, edge_color=self.color)
         
     def attach_circle(self, circle, x=0):
         circle.x = x
@@ -83,7 +83,7 @@ class Circle:
         
         sinusoid.attach_circle(self, x)
     
-    def draw_circle(self, screen, edge_color):
+    def draw(self, screen, edge_color):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
         pygame.draw.circle(screen, edge_color, (self.x, self.y), self.radius, 2)
 

@@ -45,7 +45,7 @@ class Sinusoid:
     
     def create_sinusoid(self, screen_width):
         x = np.arange(0, screen_width, self.step)
-        y = self.amplitude * np.sin(self.frequency * x + self.speed * self.t) + self.vertical_shift
+        y = self.amplitude * np.sin(self.frequency * x - self.speed * self.t) + self.vertical_shift
         
         points = np.stack((x, y.astype(np.int32)), axis=1)
         self.points = points.tolist()
@@ -68,7 +68,7 @@ class Sinusoid:
         for circle in self.circles:
             if circle.x == 0:
                 circle.x = screen_width // 2
-            circle.y = int(self.amplitude * np.sin(self.frequency * circle.x + self.speed * self.t) + self.vertical_shift)
+            circle.y = int(self.amplitude * np.sin(self.frequency * circle.x - self.speed * self.t) + self.vertical_shift)
 
 class Circle:
     def __init__(self, sinusoid, weight=50, volume=60, radius=15, color=(0, 0, 255), x=0):
@@ -92,7 +92,9 @@ class Circle:
 
 pygame.init()
 
-screen = pygame.display.set_mode((1200, 800), pygame.RESIZABLE)
+screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+pygame.display.set_caption('Волны')
+
 sinusoids = [Sinusoid(amplitude=100, frequency=0.07, speed=0.07), Sinusoid(amplitude=100, frequency=0.05, speed=0.05), Sinusoid(amplitude=100, frequency=0.03, speed=0.03), Sinusoid(amplitude=100, frequency=0.01, speed=0.1)]
 set_shift_vertical_to_sinusoids(sinusoids, screen.get_height())
 
@@ -106,7 +108,6 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
-    
     screen.fill((239, 238, 238))
     for sinusoid in sinusoids: 
         sinusoid.draw(screen)

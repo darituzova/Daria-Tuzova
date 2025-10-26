@@ -13,15 +13,17 @@ def set_shift_vertical_to_sinusoids(sinusoids, screen_height, spacing=20, paddin
     if need_height <= avail_height:
         center = screen_height // 2
         current_y = center - need_height // 2
-        flag_scale = False
     else:
-        scale = (avail_height + all_spacing) / need_height
-        current_y = padding
-        flag_scale = True
+        scale = avail_height / need_height
+        for sinusoid in sinusoids:
+            sinusoid.amplitude *= scale
+        
+        total_amplitude_after = sum(2 * sinusoid.amplitude for sinusoid in sinusoids)
+        need_height_after = total_amplitude_after + all_spacing
+        
+        current_y = padding + (avail_height - need_height_after) / 2
     
     for sinusoid in sinusoids:
-        if flag_scale:
-            sinusoid.amplitude *= scale
         sinusoid.vertical_shift = current_y + sinusoid.amplitude
         current_y = sinusoid.vertical_shift + sinusoid.amplitude + spacing
         
@@ -90,7 +92,7 @@ class Circle:
 
 pygame.init()
 
-screen = pygame.display.set_mode()
+screen = pygame.display.set_mode((1200, 800), pygame.RESIZABLE)
 sinusoids = [Sinusoid(amplitude=100, frequency=0.07, speed=0.07), Sinusoid(amplitude=100, frequency=0.05, speed=0.05), Sinusoid(amplitude=100, frequency=0.03, speed=0.03), Sinusoid(amplitude=100, frequency=0.01, speed=0.1)]
 set_shift_vertical_to_sinusoids(sinusoids, screen.get_height())
 

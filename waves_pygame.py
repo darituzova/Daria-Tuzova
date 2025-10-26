@@ -38,6 +38,8 @@ class Sinusoid:
         self.vertical_shift = 0
         self.t = 0
         self.points = []
+        
+        self.circles = []
     
     def create_sinusoid(self, screen_width):
         x = np.arange(0, screen_width, self.step)
@@ -48,13 +50,27 @@ class Sinusoid:
         
         self.t += self.time_step
     
-    def draw_sinusoid(self, screen):
+    def draw(self, screen):
         self.create_sinusoid(screen.get_width())
-        pygame.draw.lines(screen, self.color, False, self.points, self.line_width)    
+        pygame.draw.lines(screen, self.color, False, self.points, self.line_width)
         
+        self.update_circles(screen.get_width())
+        for circle in self.circles:
+            circle.draw_circle(screen)
+        
+    def attach_circle(self, circle, x=0):
+        circle.x = x
+        self.circles.append(circle)
+    
+    def update_circles(self, screen_width):
+        for circle in self.circles:
+            if circle.x == 0:
+                circle.x = screen_width // 2
+            circle.y = int(self.amplitude * np.sin(self.frequency * circle.x + self.speed * self.t) + self.vertical_shift)
 
 class Circle:
-    def __init__(self, weight, volume, radius, color):
+    def __init__(self, sinusoid, weight, volume, radius, color, x=0):
+        self.sinusoid = sinusoid
         self.weight = weight
         self.volume = volume
         self.radius = radius
@@ -62,11 +78,14 @@ class Circle:
         
         self.density = self.weight / self.volume
         
-        self.x = 0
+        self.x = x
         self.y = 0
+        
+        sinusoid.attach_circle(self, x)
     
     def draw_circle(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+        pygame.draw.circle(screen, (255, 255, 255), (self.x, self.y), self.radius, 2)
 
 
 pygame.init()
@@ -76,7 +95,7 @@ screen = pygame.display.set_mode()
 sinusoids = [Sinusoid(), Sinusoid(200, 0.02, 0.04, (255, 0, 0), 3), Sinusoid(100, 0.07, 0.05, (0, 0, 255), 2)]
 set_shift_vertical_to_sinusoids(sinusoids, screen.get_height())
 
-circle = Circle(weight=50, volume=60, radius=20, color=(255, 0, 0))  # Красный
+circles = [Circle(sinusoids[0], 50, 60, 10, (255, 255, 0)), Circle(sinusoids[1], 80, 60, 20, (255, 0, 0)), Circle(sinusoids[2], 30, 60, 8, (0, 255, 0))]
 
 running = True
 while running:
@@ -87,11 +106,10 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
     
-    screen.fill((0, 0, 0))
+    screen.fill((135, 206, 235))
     for sinusoid in sinusoids: 
-        sinusoid.draw_sinusoid(screen)
-    circle.draw_circle(screen)
-    
+        sinusoid.draw(screen)
+
     pygame.display.flip()
 
 pygame.quit()

@@ -1,7 +1,6 @@
 import pygame
 import sys
 import numpy as np
-import math
 
 
 def set_shift_vertical_to_sinusoids(sinusoids, screen_height, spacing=20):
@@ -19,7 +18,7 @@ def set_shift_vertical_to_sinusoids(sinusoids, screen_height, spacing=20):
         scale = avail_height / need_height
         current_y = 0
         flag_scale = True
-        
+    
     for sinusoid in sinusoids:
         if flag_scale:
             sinusoid.amplitude *= scale
@@ -48,11 +47,27 @@ class Sinusoid:
         self.points = points.tolist()
         
         self.t += self.time_step
-        
+    
     def draw_sinusoid(self, screen):
         self.create_sinusoid(screen.get_width())
         pygame.draw.lines(screen, self.color, False, self.points, self.line_width)    
         
+
+class Circle:
+    def __init__(self, weight, volume, radius, color):
+        self.weight = weight
+        self.volume = volume
+        self.radius = radius
+        self.color = color
+        
+        self.density = self.weight / self.volume
+        
+        self.x = 0
+        self.y = 0
+    
+    def draw_circle(self, screen):
+        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+
 
 pygame.init()
 
@@ -60,6 +75,8 @@ screen = pygame.display.set_mode()
 
 sinusoids = [Sinusoid(), Sinusoid(200, 0.02, 0.04, (255, 0, 0), 3), Sinusoid(100, 0.07, 0.05, (0, 0, 255), 2)]
 set_shift_vertical_to_sinusoids(sinusoids, screen.get_height())
+
+circle = Circle(weight=50, volume=60, radius=20, color=(255, 0, 0))  # Красный
 
 running = True
 while running:
@@ -73,6 +90,7 @@ while running:
     screen.fill((0, 0, 0))
     for sinusoid in sinusoids: 
         sinusoid.draw_sinusoid(screen)
+    circle.draw_circle(screen)
     
     pygame.display.flip()
 

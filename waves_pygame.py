@@ -82,7 +82,7 @@ class Circle:
         self.density = self.weight / self.volume
         
         self.x = x
-        self.y = 0
+        self.y = sinusoid.vertical_shift
         
         sinusoid.attach_circle(self, x)
     
@@ -118,15 +118,13 @@ def create_circles_from_config(config, sinusoids):
         else:
             circle = Circle(sinusoid)
         circles.append(circle)  
-    return circle
+    return circles
 
 pygame.init()
 
 config = load_config_json()
 
 screen = pygame.display.set_mode((config.get('window', {}).get('width', 0), config.get('window', {}).get('height', 0)), pygame.RESIZABLE)
-pygame.display.set_caption(config['window']['title'])
-
 pygame.display.set_caption(config.get('window', {}).get('title', 'Волны'))
 
 background_color = tuple(config.get('background_color', [239, 238, 238]))

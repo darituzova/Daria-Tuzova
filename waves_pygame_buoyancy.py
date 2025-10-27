@@ -106,11 +106,6 @@ class Circle:
     def draw(self, screen, edge_color):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
         pygame.draw.circle(screen, edge_color, (self.x, self.y), self.radius, 2)
-        
-        # Отладочная информация (можно убрать)
-        font = pygame.font.Font(None, 24)
-        density_text = font.render(f"ρ={self.density:.1f}", True, (0, 0, 0))
-        screen.blit(density_text, (self.x - 15, self.y - 30))
 
 def load_config_json(file='configs_json/config6.json'):
     try:

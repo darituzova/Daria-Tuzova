@@ -1,0 +1,47 @@
+{
+    "window": {
+        "width": 1200,
+        "height": 800,
+        "title": "Волны"
+    },
+
+    "sinusoids": [
+        {
+        "amplitude": 100,
+        "frequency": 0.05,
+        "speed": 0.05
+        },
+        {
+        "amplitude": 100,
+        "frequency": 0.05,
+        "speed": 0.05
+        },
+        {
+        "amplitude": 100,
+        "frequency": 0.05,
+        "speed": 0.05
+        }
+    ],
+
+    "circles": [
+        {
+        "weight": 40,
+        "volume": 80
+        },
+        {
+        "weight": 60,
+        "volume": 60
+        },
+        {
+        "weight": 100,
+        "volume": 60
+        }
+    ],
+
+    "layout": {
+        "spacing": 20,
+        "padding": 10
+    },
+
+    "background_color": [239, 238, 238]
+}
